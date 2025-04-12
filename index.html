@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nithin P G Alva - Portfolio</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Fix for profile image visibility */
+      .profile-image {
+        position: relative;
+        z-index: 5;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        overflow: visible;
+      }
+      
+      .profile-image img {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      
+      /* Ensure hero grid layout works properly */
+      .hero-grid {
+        display: grid !important;
+        grid-template-columns: 450px 1fr !important;
+        gap: 4rem !important;
+        align-items: center !important;
+      }
+      
+      /* Interactive text effects for education and experience */
+      .interactive-text {
+        display: inline-block;
+        position: relative;
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        font-family: inherit;
+        line-height: inherit;
+      }
+      
+      .education-card h3 .interactive-letter,
+      .experience-card h3 .interactive-letter,
+      .education-field .interactive-letter,
+      .company-name .interactive-letter {
+        display: inline-block;
+        transition: color 0.2s, text-shadow 0.2s;
+        font-size: inherit;
+        font-weight: inherit;
+        font-family: inherit;
+        line-height: inherit;
+      }
+      
+      .scrambled {
+        color: var(--primary-color);
+        text-shadow: 0 0 8px var(--primary-color);
+        animation: jitter 0.1s infinite;
+      }
+      
+      /* Add hover effect to cards */
+      .education-card:hover,
+      .experience-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+      
+      /* Add glow effect on hover */
+      .education-card:hover h3,
+      .experience-card:hover h3 {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+        transition: all 0.3s ease;
+      }
+      
+      /* Fix for project cards to match education/experience */
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+      
+      .project-card:hover h3 {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+      }
+      
+      /* Activities and Certificates Section Styles */
+      .activities-certificates {
+        padding: 6rem 0;
+        background-color: var(--bg-secondary);
+      }
+      
+      .subsection {
+        margin-bottom: 3rem;
+      }
+      
+      .subsection-title {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+        text-align: left;
+      }
+      
+      .activities-grid, .certificates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .activity-card, .certificate-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        height: 100%;
+      }
+      
+      .activity-card:hover, .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+      }
+      
+      .activity-icon {
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+      
+      .activity-card h4, .certificate-card h4 {
+        color: var(--text-highlight);
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+      }
+      
+      .certificate-issuer {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      
+      .certificate-date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+      }
+      
+      /* Apply the interactive text effect to new section */
+      .activity-card h4 .interactive-letter,
+      .certificate-card h4 .interactive-letter {
+        display: inline-block;
+        transition: color 0.2s, text-shadow 0.2s;
+        font-size: inherit;
+        font-weight: inherit;
+        font-family: inherit;
+        line-height: inherit;
+      }
+      
+      /* Certificate Preview Styles */
+      .certificate-preview {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+      }
+
+      .certificate-embed {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
+      }
+
+      .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .certificate-preview:hover .certificate-overlay {
+        opacity: 1;
+      }
+
+      .view-certificate {
+        padding: 0.75rem 1.5rem;
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: transform 0.2s ease;
+      }
+
+      .view-certificate:hover {
+        transform: scale(1.05);
+      }
+
+      /* Update certificate card styles */
+      .certificate-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .certificate-card h4 {
+        margin: 0.5rem 0;
+      }
+
+      .certificate-issuer {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin: 0.25rem 0;
+      }
+
+      .certificate-date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0.25rem 0;
+      }
+
+      .activity-highlights {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+      }
+      
+      .activity-highlights li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+      }
+      
+      .activity-highlights li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+
+      .activity-organization {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+        font-style: italic;
+      }
+
+      .proof-documents {
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1.5rem;
+      }
+
+      .proof-documents h5 {
+        color: var(--text-highlight);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+      }
+
+      .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      /* Adjust certificate preview for proof documents */
+      .proof-documents .certificate-preview {
+        height: 150px;
+      }
+
+      nav {
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo a {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        letter-spacing: 1px;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav .nav-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+      }
+
+      nav .nav-link:hover {
+        color: var(--primary-color);
+      }
+
+      nav .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* Active link styling */
+      nav .nav-link.active {
+        color: var(--primary-color);
+      }
+
+      nav .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        nav ul {
+          gap: 1rem;
+        }
+        
+        nav .nav-link {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Add these styles to match project card effects */
+      .activity-card p, .certificate-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        transition: all 0.3s ease;
+      }
+
+      .activity-card:hover p, .certificate-card:hover p {
+        color: var(--text-highlight);
+      }
+
+      .activity-card:hover, .certificate-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .activity-card:hover h4, .certificate-card:hover h4 {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+      }
+
+      .activity-highlights li {
+        transition: all 0.3s ease;
+      }
+
+      .activity-card:hover .activity-highlights li {
+        color: var(--text-highlight);
+      }
+
+      .activity-card:hover .activity-highlights li::before {
+        text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+      }
+
+      .certificate-issuer {
+        transition: all 0.3s ease;
+      }
+
+      .certificate-card:hover .certificate-issuer {
+        color: var(--primary-color);
+        text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+      }
+
+      /* Add these styles for Position of Responsibility and Achievements sections */
+      .activities-grid .activity-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .activities-grid .activity-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .activities-grid .activity-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .activities-grid .activity-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+      }
+
+      .activities-grid .activity-icon {
+        color: var(--primary-color);
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .activities-grid .activity-card h4 {
+        color: var(--heading-color);
+        font-size: 24px;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .activities-grid .activity-organization {
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .activities-grid .activity-highlights {
+        list-style: none;
+        margin-bottom: 2rem;
+        flex-grow: 1;
+      }
+
+      .activities-grid .activity-highlights li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-color);
+      }
+
+      .activities-grid .activity-highlights li::before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+
+      /* Achievement section styling to match projects */
+      .proof-documents .certificate-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .proof-documents .certificate-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .proof-documents .certificate-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .proof-documents .certificate-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+      }
+
+      .proof-documents .certificate-card h4 {
+        color: var(--heading-color);
+        font-size: 24px;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .proof-documents .certificate-issuer {
+        color: var(--primary-color);
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Animation for cards */
+      @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      }
+
+      /* Add animation delays for cards */
+      .activities-grid .activity-card:nth-child(1) { animation-delay: 0.1s; }
+      .activities-grid .activity-card:nth-child(2) { animation-delay: 0.2s; }
+      .proof-documents .certificate-card:nth-child(1) { animation-delay: 0.3s; }
+      .proof-documents .certificate-card:nth-child(2) { animation-delay: 0.4s; }
+
+      /* Add these styles to match project card effects for experience section */
+      .experience-grid .experience-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .experience-grid .experience-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .experience-grid .experience-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .experience-grid .experience-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+      }
+
+      .experience-grid .experience-card h3 {
+        color: var(--heading-color);
+        font-size: 24px;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .experience-grid .experience-card p {
+        color: var(--primary-color);
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .experience-grid .experience-highlights {
+        list-style: none;
+        margin-bottom: 2rem;
+        flex-grow: 1;
+      }
+
+      .experience-grid .experience-highlights li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: var(--text-color);
+      }
+
+      .experience-grid .experience-highlights li::before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+      }
+
+      /* Add animation delays for experience cards */
+      .experience-grid .experience-card:nth-child(1) { animation-delay: 0.1s; }
+      .experience-grid .experience-card:nth-child(2) { animation-delay: 0.2s; }
+      .experience-grid .experience-card:nth-child(3) { animation-delay: 0.3s; }
+
+      /* Keep the existing experience grid layout */
+      .experience-grid {
+        grid-template-columns: 1fr;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Add these styles to match Selection Documents style for certificates */
+      .certificates-grid .certificate-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 2rem;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .certificates-grid .certificate-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .certificates-grid .certificate-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .certificates-grid .certificate-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        border-color: var(--primary-color);
+      }
+
+      .certificates-grid .certificate-card h4 {
+        color: var(--heading-color);
+        font-size: 24px;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+
+      .certificates-grid .certificate-card .certificate-issuer {
+        color: var(--primary-color);
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .certificates-grid .certificate-card .certificate-preview {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+      }
+
+      .certificates-grid .certificate-card .certificate-preview embed {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .certificates-grid .certificate-card .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 25, 47, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .certificates-grid .certificate-card:hover .certificate-overlay {
+        opacity: 1;
+      }
+
+      .certificates-grid .certificate-card .view-certificate {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-family: 'SF Mono', 'Fira Code', monospace;
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .certificates-grid .certificate-card .view-certificate:hover {
+        background: rgba(100, 255, 218, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Add animation delays for certificate cards */
+      .certificates-grid .certificate-card:nth-child(1) { animation-delay: 0.1s; }
+      .certificates-grid .certificate-card:nth-child(2) { animation-delay: 0.2s; }
+      .certificates-grid .certificate-card:nth-child(3) { animation-delay: 0.3s; }
+      .certificates-grid .certificate-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#home">Portfolio</a>
+            </div>
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#work" class="nav-link">Featured Projects</a></li>
+                <li><a href="#skills" class="nav-link">Technical Skills</a></li>
+                <li><a href="#certificates" class="nav-link">Certificates & Activities</a></li>
+                <li><a href="#contact" class="nav-link">Let's Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="social-links">
+        <a href="your-github-url" target="_blank" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.237 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+        <a href="your-linkedin-url" target="_blank" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+        </a>
+        <a href="mailto:your.email@example.com" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-grid">
+                <div class="profile-image">
+                    <img src="ASSETS/NITHIN.jpg" alt="Nithin P G Alva" style="object-position: center top;">
+                </div>
+                <div class="hero-text">
+                    <p class="subtitle" id="greeting">I am</p>
+                    <h1 id="name-effect">Nithin P G Alva</h1>
+                    <h2>Electronics & Communication Engineer</h2>
+                    <p class="hero-description">
+                        A passionate Electronics and Communication Engineer specializing in IoT, VLSI design, and automation technologies.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="cta-button primary">Get In Touch</a>
+                        <a href="#work" class="cta-button secondary">View My Work</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I am a passionate and driven Electronics and Communication Engineering student with a keen interest in VLSI design, embedded systems, and automation. I enjoy working on innovative projects that combine hardware and software to create efficient and practical solutions. My academic journey has allowed me to develop strong problem-solving skills and a deep understanding of digital design, microcontrollers, and circuit analysis.
+
+                        Beyond academics, I am always eager to explore new technologies, enhance my technical expertise, and take on challenges that push my creativity and analytical thinking. I aim to contribute to cutting-edge advancements in electronics and engineering.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="section-container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <h3>Intern - IoT and Automation</h3>
+                    <p>Government Tool Room and Training Centre (GTTC), Mangalore</p>
+                    <ul class="experience-highlights">
+                        <li>Completed 100+ hours of intensive hands-on training in IoT and automation technologies</li>
+                        <li>Gained practical experience in designing and implementing IoT systems for industrial automation</li>
+                        <li>Worked on smart device integration and real-time automation projects</li>
+                    </ul>
+                </div>
+                <div class="experience-card">
+                    <h3>Technical Service Assistant (Part-time)</h3>
+                    <p>Various Local Service Centers, Sullia</p>
+                    <ul class="experience-highlights">
+                        <li>Worked part-time alongside engineering studies at AC and refrigerator repair & service centers</li>
+                        <li>Gained hands-on knowledge in installation, maintenance, and troubleshooting of cooling systems</li>
+                        <li>Assisted in inverter and battery servicing, learning practical aspects of power backup systems</li>
+                        <li>Involved in general technical support, electrical repairs, and customer interaction tasks</li>
+                    </ul>
+                </div>
+                <div class="experience-card">
+                    <h3>Intra Internship Program</h3>
+                    <p>KVGCE Innovation and Incubation Cell, Sullia</p>
+                    <ul class="experience-highlights">
+                        <li>Participated in college-level innovation projects focused on automation and embedded systems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="work" class="projects">
+        <div class="section-container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Major Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-type">Major Project - VLSI Front-End Design</div>
+                        <h3>32-Bit Multiply-Accumulate (MAC) Unit</h3>
+                    </div>
+                    <p class="project-description">
+                        High-performance MAC unit implementation with advanced features:
+                    </p>
+                    <ul class="project-features">
+                        <li>Designed using Verilog HDL, focused on RTL design and simulation</li>
+                        <li>Utilized Vedic multiplier for efficient multiplication and Carry Save Adder (CSA) for fast accumulation</li>
+                        <li>Simulated and verified using Questa Simulator, with synthesis using Xilinx and Intel Quartus Prime</li>
+                        <li>Includes comparative analysis with other MAC unit designs for speed, resource utilization, and logic depth</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span>Verilog</span>
+                        <span>VLSI</span>
+                        <span>RTL Design</span>
+                        <span>Digital Design</span>
+                    </div>
+                </div>
+
+                <!-- Medical Project -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-type">Minor Project - IoT Based Medical Application</div>
+                        <h3>Intravenous Fluid Monitoring and Controlling System</h3>
+                    </div>
+                    <p class="project-description">
+                        Smart IoT-based medical monitoring system:
+                    </p>
+                    <ul class="project-features">
+                        <li>Developed IoT fluid monitoring and controlling system to estimate fluid levels based on weight</li>
+                        <li>Designed a non-invasive control mechanism to regulate fluid flow by externally squeezing the tube</li>
+                        <li>Implemented remote monitoring and emergency alert system using ThingWorx and Blynk IoT</li>
+                        <li>Features reliable performance with remote and local control options</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span>IoT</span>
+                        <span>NodeMCU</span>
+                        <span>ThingWorx</span>
+                        <span>Medical Technology</span>
+                    </div>
+                </div>
+
+                <!-- Home Automation -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-type">Hobby Project - Home Automation</div>
+                        <h3>IoT-Based Relay Automation System</h3>
+                    </div>
+                    <p class="project-description">
+                        Smart home automation system with wireless control:
+                    </p>
+                    <ul class="project-features">
+                        <li>Designed and developed a 4-relay-based IoT circuit to control household AC/DC appliances</li>
+                        <li>Integrated NodeMCU with RemoteXY mobile application for wireless control up to 50 meters</li>
+                        <li>Successfully implemented and tested in real-world home environment</li>
+                        <li>Scalable to high-power devices like fans and small motors</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span>IoT</span>
+                        <span>NodeMCU</span>
+                        <span>Home Automation</span>
+                        <span>RemoteXY</span>
+                    </div>
+                </div>
+
+                <!-- Medical Training Model -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-type">Collaborative Project - Medical Training</div>
+                        <h3>Human Ear Simulation Model</h3>
+                    </div>
+                    <p class="project-description">
+                        Interactive medical training model for Ayurveda students:
+                    </p>
+                    <ul class="project-features">
+                        <li>Designed and built a life-like working ear model to demonstrate the auditory pathway</li>
+                        <li>Simulated real ear functionality using microphone for sound input and vibration motors for bone movement</li>
+                        <li>Integrated feedback system with response buzzer output and custom timer code</li>
+                        <li>Successfully delivered as a teaching aid for medical students</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span>Medical Education</span>
+                        <span>Electronics</span>
+                        <span>Simulation</span>
+                        <span>Arduino</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="section-container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>IoT Development</h3>
+                    <ul>
+                        <li>ThingWorx platform</li>
+                        <li>Arduino</li>
+                        <li>NodeMCU programming</li>
+                        <li>Remote monitoring systems</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>VLSI Design</h3>
+                    <ul>
+                        <li>Circuit design</li>
+                        <li>RTL design</li>
+                        <li>Verilog HDL</li>
+                        <li>Digital & Analog circuit design</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>PLC Programming</h3>
+                    <ul>
+                        <li>Ladder diagrams</li>
+                        <li>Industrial automation</li>
+                        <li>PLC operations</li>
+                        <li>Control systems</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul>
+                        <li>C</li>
+                        <li>Python</li>
+                        <li>Verilog HDL</li>
+                        <li>PLC Programming</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Software Tools</h3>
+                    <ul>
+                        <li>Quartus Prime</li>
+                        <li>Xilinx</li>
+                        <li>LTSpice</li>
+                        <li>Multisim</li>
+                        <li>AutoCAD</li>
+                        <li>Schneider Electric PLC</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>AI Tools & Assistants</h3>
+                    <ul>
+                        <li>Cursor</li>
+                        <li>DeepSeek</li>
+                        <li>Blackbox</li>
+                        <li>Microsoft Copilot</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities and Certificates Section -->
+    <section id="certificates" class="activities-certificates">
+        <div class="section-container">
+            <h2 class="section-title">Certificates & Activities</h2>
+            
+            <!-- Activities Subsection -->
+            <div class="subsection">
+                <h3 class="subsection-title">Position of Responsibility</h3>
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h4>Institute Event Coordinator - IoT Club, KVGCE</h4>
+                        <ul class="activity-highlights">
+                            <li>Responsible for planning and organizing technical events including workshops, seminars, and hands-on sessions focused on IoT and automation</li>
+                            <li>Facilitated peer learning activities and knowledge-sharing meetups among club members</li>
+                            <li>Contributed to building a collaborative learning environment and increasing student engagement in IoT-based innovation</li>
+                        </ul>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <h4>Project Leader - 32-Bit MAC Unit (Major Project)</h4>
+                        <p class="activity-organization">KVG College of Engineering | 2024-2025</p>
+                        <ul class="activity-highlights">
+                            <li>Spearheaded a team of 4 members in designing and implementing the 32-bit Multiply-Accumulate unit</li>
+                            <li>Coordinated RTL design tasks, ensuring timely completion of Verilog modules</li>
+                            <li>Conducted weekly progress reviews and troubleshooting sessions</li>
+                            <li>Presented final design to faculty panel with comparative performance analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- New Achievements Subsection -->
+            <div class="subsection">
+                <h3 class="subsection-title">Achievements</h3>
+                
+                <!-- Achievement Description -->
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 15l-8-8h16l-8 8z"/>
+                                <path d="M12 15v7"/>
+                                <path d="M8 19h8"/>
+                            </svg>
+                        </div>
+                        <h4>ISRO Robotics Challenge (IRoC-U) 2024 – National Finalist</h4>
+                        <p class="activity-organization">Team Adhvitiya (ID: 10871) | KVG College of Engineering | Jan 2024</p>
+                        <ul class="activity-highlights">
+                            <li>Selected among top 148 teams nationwide (from 1000+ entries) in ISRO's premier robotics competition</li>
+                            <li>Key contributions in Rover Design: Optimized circuitry for autonomous navigation (crater/obstacle detection) and sample retrieval</li>
+                            <li>Cost Engineering: Reduced component costs by 30% through strategic vendor selection</li>
+                            <li>Validation: Tested sensor fusion (IMU + cameras) and emergency response algorithms in simulation</li>
+                            <li>Result: Cleared rigorous 1st round (proposal evaluation) but could not proceed to 2nd round due to funding constraints</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ISRO Documents - Update to match certificate style -->
+                <div class="proof-documents">
+                    <h5>Selection Documents</h5>
+                    <div class="documents-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <!-- ISRO Proposal Report -->
+                        <div class="certificate-card">
+                            <div class="certificate-preview">
+                                <embed src="ASSETS/ISRO/isro proposal report kvgce.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                                <div class="certificate-overlay">
+                                    <a href="ASSETS/ISRO/isro proposal report kvgce.pdf" target="_blank" class="view-certificate">View Proposal Report</a>
+                                </div>
+                            </div>
+                            <h4>ISRO IRoC-U Proposal Report</h4>
+                            <p class="certificate-issuer">Team Adhvitiya (ID: 10871)</p>
+                            <p>Detailed technical proposal for lunar rover design</p>
+                        </div>
+
+                        <!-- ISRO Selection Result -->
+                        <div class="certificate-card">
+                            <div class="certificate-preview">
+                                <embed src="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                                <div class="certificate-overlay">
+                                    <a href="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf" target="_blank" class="view-certificate">View Selection Result</a>
+                                </div>
+                            </div>
+                            <h4>National Level Selection Result</h4>
+                            <p class="certificate-issuer">ISRO Robotics Challenge 2024</p>
+                            <p>First round qualification among top 148 teams</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates Subsection -->
+            <div class="subsection">
+                <h3 class="subsection-title">Certifications</h3>
+                <div class="certificates-grid">
+                    <!-- PLC Basics (GTTC) -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/basics of plc by gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/basics of plc by gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>PLC Fundamentals</h4>
+                        <p class="certificate-issuer">GTTC Mangalore</p>
+                        <p>Introduction to Programmable Logic Controllers and industrial automation</p>
+                    </div>
+
+                    <!-- Communication Skills (GTTC) -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/communication skills by gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/communication skills by gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Communication Skills</h4>
+                        <p class="certificate-issuer">GTTC Mangalore</p>
+                        <p>Professional communication and workplace interaction training</p>
+                    </div>
+
+                    <!-- IoT Development (GTTC) -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>IoT Development with ThingWorx</h4>
+                        <p class="certificate-issuer">GTTC Mangalore</p>
+                        <p>Fundamentals of IoT development using ThingWorx platform</p>
+                    </div>
+                    
+                    <!-- KVGCE Internship -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/first year Intra internship kvgce certificate.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed" style="width: 100%; height: 100%; object-fit: contain;">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/first year Intra internship kvgce certificate.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Intra Internship Program</h4>
+                        <p class="certificate-issuer">KVGCE Innovation and Incubation Cell</p>
+                        <p>First-year internship program focused on practical engineering applications</p>
+                    </div>
+
+                    <!-- Arduino Intermediate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Arduino Intermediate Course</h4>
+                        <p class="certificate-issuer">Infosys Springboard</p>
+                        <p>Advanced Arduino programming and project development</p>
+                    </div>
+
+                    <!-- Python Basics -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/basics of python  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/basics of python  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Python Programming Basics</h4>
+                        <p class="certificate-issuer">Infosys Springboard</p>
+                        <p>Fundamental concepts of Python programming language</p>
+                    </div>
+
+                    <!-- Semiconductors -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Extrinsic Semiconductors</h4>
+                        <p class="certificate-issuer">Infosys Springboard</p>
+                        <p>Introduction to semiconductor physics and applications</p>
+                    </div>
+
+                    <!-- Arduino Workshop -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Resource Person - Arduino Workshop</h4>
+                        <p class="certificate-issuer">KVGCE</p>
+                        <p class="certificate-date">July 21, 2023</p>
+                        <p>Letter of appreciation for conducting Arduino with TinkerCAD workshop</p>
+                    </div>
+
+                    <!-- MicroPython -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/micro_python_board in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/micro_python_board in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>MicroPython Programming</h4>
+                        <p class="certificate-issuer">Infosys Springboard</p>
+                        <p>MicroPython implementation for embedded systems</p>
+                    </div>
+
+                    <!-- RBI Quiz -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/participated in RBI national wide Quiz.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/participated in RBI national wide Quiz.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>RBI National Quiz Participant</h4>
+                        <p class="certificate-issuer">Reserve Bank of India</p>
+                        <p>Participation in nationwide financial literacy quiz</p>
+                    </div>
+
+                    <!-- Programming Basics -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/Programming basics in great learning.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Programming basics in great learning.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Programming Fundamentals</h4>
+                        <p class="certificate-issuer">Great Learning</p>
+                        <p>Core concepts of computer programming</p>
+                    </div>
+
+                    <!-- Solar Panel Installation -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/skill india solar pannel installation.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/skill india solar pannel installation.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Solar Panel Installation</h4>
+                        <p class="certificate-issuer">Skill India</p>
+                        <p>Technical training in solar panel installation and maintenance</p>
+                    </div>
+
+                    <!-- TCS iON -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/tcs ion softskill training of 2 week s.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/tcs ion softskill training of 2 week s.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Soft Skills Training</h4>
+                        <p class="certificate-issuer">TCS iON</p>
+                        <p>Two-week comprehensive soft skills development program</p>
+                    </div>
+
+                    <!-- Time Management -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/time management  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/time management  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Time Management</h4>
+                        <p class="certificate-issuer">Infosys Springboard</p>
+                        <p>Effective time management and productivity techniques</p>
+                    </div>
+
+                    <!-- VLSI Basics -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>VLSI for Beginners</h4>
+                        <p class="certificate-issuer">National Institute of Electronics and Information Technology, NIT Calicut</p>
+                        <p>Introduction to VLSI design and implementation</p>
+                    </div>
+                    
+                    <!-- Sports and Fitness (MOVED TO LAST) -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <embed src="ASSETS/Certificates/asian sport and physical fittness board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/asian sport and physical fittness board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Sports and Physical Fitness Certification</h4>
+                        <p class="certificate-issuer">Asian Sport and Physical Fitness Board</p>
+                        <p>Comprehensive training in sports and physical fitness</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-subtitle">Have a question or want to work together?</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3>Email</h3>
+                        <a href="mailto:npgkvgce@gmail.com">npgkvgce@gmail.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <a href="https://www.linkedin.com/in/nithin-p-g-alva-959b66288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Nithin P G Alva</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>Location</h3>
+                        <a href="https://maps.app.goo.gl/SAvqcKkEHkbBsaEA7?g_st=aw" target="_blank">Sullia, Dakshina Kannada, Karnataka</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-decoration">
+                <div class="decoration-circle"></div>
+                <div class="decoration-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="sitemap">
+                <h3>Site Map</h3>
+                <div class="site-map-links">
+                    <a href="#home">Home</a> |
+                    <a href="#about">About Me</a> |
+                    <a href="#experience">Experience</a> |
+                    <a href="#work">Featured Projects</a> |
+                    <a href="#skills">Technical Skills</a> |
+                    <a href="#certificates">Certificates & Activities</a> |
+                    <a href="#contact">Let's Connect</a>
+                </div>
+            </div>
+            <p>© 2025 Nithin P G Alva. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      // Direct script to ensure name effect works
+      document.addEventListener('DOMContentLoaded', function() {
+        const nameElement = document.getElementById('name-effect');
+        if (nameElement) {
+          const originalText = nameElement.textContent;
+          nameElement.innerHTML = '';
+          
+          const nameWrapper = document.createElement('span');
+          nameWrapper.className = 'name-typing-effect';
+          nameElement.appendChild(nameWrapper);
+          
+          const chars = '!<>-_\\/[]{}—=+*^?#_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          let iteration = 0;
+          
+          const interval = setInterval(() => {
+            nameWrapper.innerText = originalText
+              .split('')
+              .map((letter, index) => {
+                if (index < iteration) {
+                  return originalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+              })
+              .join('');
+            
+            if (iteration >= originalText.length) {
+              clearInterval(interval);
+              
+              // Add interactive hover effect
+              const letters = originalText.split('').map((letter, index) => {
+                const span = document.createElement('span');
+                span.className = 'interactive-letter';
+                span.textContent = letter;
+                span.setAttribute('data-letter', letter);
+                // Add proper spacing for words
+                if (letter === ' ') {
+                  span.innerHTML = '&nbsp;';
+                  span.style.marginRight = '0.25em';
+                }
+                // Add letter spacing for better readability
+                span.style.letterSpacing = '0.05em';
+                return span;
+              });
+              
+              nameWrapper.innerHTML = '';
+              letters.forEach(letter => nameWrapper.appendChild(letter));
+              
+              nameWrapper.addEventListener('mousemove', scrambleLetters);
+              nameWrapper.addEventListener('click', scrambleAllLetters);
+            }
+            
+            iteration += 1/3;
+          }, 60);
+            }
+          
+          function scrambleLetters(e) {
+            const letters = nameWrapper.querySelectorAll('.interactive-letter');
+            const rect = nameWrapper.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const letterWidth = rect.width / originalText.length;
+            const centerIndex = Math.floor(mouseX / letterWidth);
+            
+            letters.forEach((letter, index) => {
+              const distance = Math.abs(index - centerIndex);
+              // Don't scramble spaces
+              const isSpace = letter.getAttribute('data-letter') === ' ';
+              if (distance < 4 && Math.random() > 0.5 && !isSpace) {
+                letter.textContent = chars[Math.floor(Math.random() * chars.length)];
+                letter.classList.add('scrambled');
+              } else {
+                // Preserve spaces
+                const originalChar = letter.getAttribute('data-letter');
+                letter.textContent = originalChar === ' ' ? ' ' : originalChar;
+                letter.classList.remove('scrambled');
+              }
+            });
+          }
+          
+          function scrambleAllLetters() {
+            const letters = nameWrapper.querySelectorAll('.interactive-letter');
+            letters.forEach(letter => {
+              // Don't scramble spaces
+              const isSpace = letter.getAttribute('data-letter') === ' ';
+              if (!isSpace) {
+                letter.textContent = chars[Math.floor(Math.random() * chars.length)];
+                letter.classList.add('scrambled');
+                setTimeout(() => {
+                  letter.textContent = letter.getAttribute('data-letter');
+                  letter.classList.remove('scrambled');
+                }, 500);
+              }
+            });
+          }
+        });
+        
+        // Apply interactive effects to education and experience sections
+        function applyInteractiveEffects() {
+          // Get all headings in education and experience sections
+          const headings = document.querySelectorAll('.education-card h3, .experience-card h3, .education-field, .company-name, .project-card h3');
+          
+          headings.forEach(heading => {
+            const originalText = heading.textContent;
+            const originalStyle = window.getComputedStyle(heading);
+            const originalColor = originalStyle.color;
+            const originalFontSize = originalStyle.fontSize;
+            const originalFontWeight = originalStyle.fontWeight;
+            
+            heading.innerHTML = '';
+            
+            // Create wrapper
+            const wrapper = document.createElement('span');
+            wrapper.className = 'interactive-text';
+            wrapper.style.color = originalColor;
+            wrapper.style.fontSize = originalFontSize;
+            wrapper.style.fontWeight = originalFontWeight;
+            heading.appendChild(wrapper);
+            
+            // Create letter spans
+            const letters = originalText.split('').map((letter, index) => {
+              const span = document.createElement('span');
+              span.className = 'interactive-letter';
+              span.textContent = letter;
+              span.setAttribute('data-letter', letter);
+              span.style.color = originalColor;
+              span.style.fontSize = originalFontSize;
+              span.style.fontWeight = originalFontWeight;
+              
+              // Add proper spacing for words
+              if (letter === ' ') {
+                span.innerHTML = '&nbsp;';
+                span.style.marginRight = '0.25em';
+              }
+              
+              return span;
+            });
+            
+            // Add letters to wrapper
+            letters.forEach(letter => wrapper.appendChild(letter));
+            
+            // Add mouse interaction
+            const chars = '!<>-_\\/[]{}—=+*^?#_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            
+            wrapper.addEventListener('mousemove', (e) => {
+              const letterElements = wrapper.querySelectorAll('.interactive-letter');
+              const rect = wrapper.getBoundingClientRect();
+              const mouseX = e.clientX - rect.left;
+              const letterWidth = rect.width / originalText.length;
+              const centerIndex = Math.floor(mouseX / letterWidth);
+              
+              letterElements.forEach((letter, index) => {
+                const distance = Math.abs(index - centerIndex);
+                const isSpace = letter.getAttribute('data-letter') === ' ';
+                
+                if (distance < 3 && Math.random() > 0.7 && !isSpace) {
+                  letter.textContent = chars[Math.floor(Math.random() * chars.length)];
+                  letter.classList.add('scrambled');
+                } else {
+                  const originalChar = letter.getAttribute('data-letter');
+                  letter.textContent = originalChar === ' ' ? ' ' : originalChar;
+                  letter.classList.remove('scrambled');
+                  letter.style.color = originalColor;
+                }
+              });
+            });
+            
+            // Reset on mouse leave
+            wrapper.addEventListener('mouseleave', () => {
+              const letterElements = wrapper.querySelectorAll('.interactive-letter');
+              letterElements.forEach(letter => {
+                const originalChar = letter.getAttribute('data-letter');
+                letter.textContent = originalChar === ' ' ? ' ' : originalChar;
+                letter.classList.remove('scrambled');
+                letter.style.color = originalColor;
+              });
+            });
+          });
+        }
+        
+        // Apply effects after a short delay to ensure DOM is ready
+        setTimeout(applyInteractiveEffects, 1500);
+
+        // Add this to your existing JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight active section in navigation
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Direct fix for navigation highlighting issue - add this at the very end of your js/main.js file
+        (function() {
+            // Wait for page to be fully loaded
+            window.addEventListener('load', function() {
+                // Remove any conflicting scroll listeners
+                window.removeEventListener('scroll', updateActiveNavLink);
+                
+                // Get all sections and nav links
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                // Create a mapping of section IDs to nav links
+                const navMap = {};
+                navLinks.forEach(link => {
+                    const targetId = link.getAttribute('href').substring(1);
+                    navMap[targetId] = link;
+                });
+                
+                // Function to update active link
+                function updateActive() {
+                    // Current scroll position - shift detection point upward significantly
+                    const scrollPosition = window.pageYOffset + 250;  // Increased offset to detect sections higher
+                    
+                    // Find current section
+                    let currentSection = '';
+                    
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop - 150; // Increased offset
+                        const sectionBottom = sectionTop + section.offsetHeight;
+                        
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                            currentSection = section.getAttribute('id');
+                        }
+                    });
+                    
+                    // Update active link
+                    if (currentSection) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        
+                        const activeLink = navMap[currentSection];
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                }
+                
+                // Handle click events on nav links
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Clear active state from all links
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        
+                        // Set clicked link as active immediately
+                        this.classList.add('active');
+                        
+                        // Get target section
+                        const targetId = this.getAttribute('href');
+                        const targetSection = document.querySelector(targetId);
+                        
+                        if (targetSection) {
+                            // Calculate scroll position with adjusted offset
+                            const targetPosition = targetSection.offsetTop - 100;
+                            
+                            // Scroll to target section
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+                
+                // Add scroll event listener with throttling
+                let isScrolling = false;
+                window.addEventListener('scroll', function() {
+                    if (!isScrolling) {
+                        window.requestAnimationFrame(function() {
+                            updateActive();
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                });
+                
+                // Initialize on page load
+                updateActive();
+                
+                // Override any existing inline script
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Force our handler to run after everything else
+                    setTimeout(updateActive, 200);
+                });
+            });
+        })();
+
+        // Enhanced navigation animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Add ripple effect on click
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Create a ripple element
+                    const ripple = document.createElement('span');
+                    ripple.className = 'nav-ripple';
+                    
+                    // Set ripple style
+                    ripple.style.cssText = `
+                        position: absolute;
+                        background: rgba(100, 255, 218, 0.4);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        transform: translate(-50%, -50%);
+                        animation: navRipple 0.6s linear;
+                        z-index: -1;
+                    `;
+                    
+                    // Get click position
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Set ripple position
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    // Add ripple to link
+                    this.appendChild(ripple);
+                    
+                    // Remove ripple after animation
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+
+        // Add the ripple keyframe animation to the document
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes navRipple {
+                0% {
+                    width: 0;
+                    height: 0;
+                    opacity: 0.5;
+                }
+                100% {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+    </script>
+</body>
+</html> 

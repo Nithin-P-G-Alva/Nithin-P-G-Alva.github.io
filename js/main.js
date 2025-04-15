@@ -807,3 +807,140 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial active section
     setTimeout(setInitialActive, 100);
 });
+
+// Add certificate preview functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Create secure modal
+    const modal = document.createElement('div');
+    modal.className = 'secure-modal';
+    modal.innerHTML = `
+        <div class="secure-modal-content">
+            <button class="secure-modal-close">&times;</button>
+            <h3 class="secure-modal-title"></h3>
+            <div class="secure-modal-image-container">
+                <div class="secure-modal-watermark">Nithin P G Alva Portfolio</div>
+                <div class="secure-modal-watermark-grid">
+                    ${Array(9).fill('<div class="watermark-cell">Nithin P G Alva</div>').join('')}
+                </div>
+                <img class="secure-modal-image" alt="Certificate Preview">
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Handle certificate preview clicks
+    document.querySelectorAll('.view-certificate').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const certificateUrl = this.getAttribute('href');
+            const title = this.closest('.certificate-card').querySelector('h4').textContent;
+            
+            // Update modal content
+            modal.querySelector('.secure-modal-title').textContent = title;
+            const modalImage = modal.querySelector('.secure-modal-image');
+            modalImage.src = certificateUrl;
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close modal functionality
+    modal.querySelector('.secure-modal-close').addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Prevent right-click on modal
+    modal.addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Prevent keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (modal.classList.contains('active')) {
+            // Prevent saving shortcuts
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+            }
+            // Close modal on Escape
+            if (e.key === 'Escape') {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            // Prevent print screen
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+            }
+        }
+    });
+
+    // Additional security measures for images
+    document.querySelectorAll('.certificate-preview img, .secure-modal-image').forEach(img => {
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+        img.addEventListener('mousedown', (e) => e.preventDefault());
+        img.style.webkitUserSelect = 'none';
+        img.style.webkitTouchCallout = 'none';
+        img.setAttribute('draggable', 'false');
+    });
+});
+
+// Security measures to prevent downloads
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.closest('.certificate-preview')) {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    // Prevent common keyboard shortcuts for saving
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+    }
+    // Prevent print screen
+    if (e.key === 'PrintScreen') {
+        e.preventDefault();
+    }
+});
+
+// Prevent drag and drop of images
+document.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+    }
+});
+
+// Add security class to all certificate previews
+document.querySelectorAll('.certificate-preview img').forEach(img => {
+    img.classList.add('protected-image');
+    // Add a subtle watermark with your name
+    img.setAttribute('crossorigin', 'anonymous');
+    img.style.position = 'relative';
+});
+
+// Add fullscreen protection
+document.addEventListener('fullscreenchange', function() {
+    const modalImage = document.querySelector('.secure-modal-image-container');
+    if (document.fullscreenElement === modalImage) {
+        const watermark = modalImage.querySelector('.secure-modal-watermark');
+        const watermarkGrid = modalImage.querySelector('.secure-modal-watermark-grid');
+        watermark.style.opacity = '0.2';
+        watermarkGrid.style.opacity = '0.15';
+    }
+});
+
+// Prevent fullscreen exit from removing watermark
+document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement) {
+        const watermark = document.querySelector('.secure-modal-watermark');
+        const watermarkGrid = document.querySelector('.secure-modal-watermark-grid');
+        if (watermark) watermark.style.opacity = '0.15';
+        if (watermarkGrid) watermarkGrid.style.opacity = '0.1';
+    }
+});

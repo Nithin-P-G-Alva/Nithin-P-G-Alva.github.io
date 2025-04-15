@@ -99,7 +99,13 @@
         padding: 6rem 0;
         background-color: var(--bg-secondary);
       }
-      
+
+      .activities-certificates .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;  /* Add consistent padding */
+      }
+
       .subsection {
         margin-bottom: 3rem;
       }
@@ -170,18 +176,60 @@
       .certificate-preview {
         position: relative;
         width: 100%;
-        height: 200px;
+        height: 250px;
         margin-bottom: 1rem;
         border-radius: 8px;
         overflow: hidden;
-        border: 1px solid var(--border-color);
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .certificate-embed {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      img.certificate-embed {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .certificates-grid .certificate-card {
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 1.5rem;
+        height: 100%;
+      }
+
+      .certificates-grid .certificate-card .certificate-preview {
+        background: white;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .certificates-grid .certificate-card .certificate-preview img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .certificates-grid .certificate-card .certificate-preview embed {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border: none;
+        object-fit: contain;
       }
 
       .certificate-overlay {
@@ -190,7 +238,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(10, 25, 47, 0.85);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -717,12 +765,21 @@
         overflow: hidden;
         position: relative;
         border: 1px solid rgba(100, 255, 218, 0.1);
+        background: rgba(17, 34, 64, 0.7);
       }
 
-      .certificates-grid .certificate-card .certificate-preview embed {
+      .certificates-grid .certificate-card .certificate-preview img.certificate-embed {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+        background: white;
+      }
+
+      .certificates-grid .certificate-card .certificate-preview embed.certificate-embed {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: transparent;
       }
 
       .certificates-grid .certificate-card .certificate-overlay {
@@ -764,6 +821,258 @@
       .certificates-grid .certificate-card:nth-child(2) { animation-delay: 0.2s; }
       .certificates-grid .certificate-card:nth-child(3) { animation-delay: 0.3s; }
       .certificates-grid .certificate-card:nth-child(4) { animation-delay: 0.4s; }
+
+      /* Certificate visibility fixes */
+      .certificates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 0;  /* Remove the padding */
+        margin: 0;   /* Add margin 0 */
+      }
+
+      .certificate-card {
+        background: rgba(17, 34, 64, 0.7);
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 1px solid rgba(100, 255, 218, 0.1);
+        transition: all 0.3s ease;
+        height: 100%;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .certificate-preview {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        overflow: hidden;
+        background: white;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      .certificate-embed {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+      }
+
+      .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 25, 47, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .certificate-preview:hover .certificate-overlay {
+        opacity: 1;
+      }
+
+      /* Force image display */
+      .certificate-preview img {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      /* Remove any animation delays */
+      .certificates-grid .certificate-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      /* Document Grid Styles */
+      .documents-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          padding: 2rem 0;
+      }
+
+      .document-card {
+          background: rgba(17, 34, 64, 0.7);
+          border-radius: 8px;
+          padding: 1.5rem;
+          border: 1px solid rgba(100, 255, 218, 0.1);
+          transition: all 0.3s ease;
+      }
+
+      .document-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+          border-color: var(--primary-color);
+      }
+
+      .document-preview {
+          position: relative;
+          width: 100%;
+          height: 200px;
+          margin-bottom: 1rem;
+          border-radius: 8px;
+          overflow: hidden;
+          background: rgba(255, 255, 255, 0.05);
+      }
+
+      .document-thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+      }
+
+      .document-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(10, 25, 47, 0.85);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+      }
+
+      .document-preview:hover .document-overlay {
+          opacity: 1;
+      }
+
+      .view-document {
+          padding: 0.75rem 1.5rem;
+          background-color: var(--primary-color);
+          color: var(--background-color);
+          text-decoration: none;
+          border-radius: 4px;
+          font-weight: 600;
+          transition: transform 0.2s ease;
+      }
+
+      .view-document:hover {
+          transform: scale(1.05);
+      }
+
+      .document-card h4 {
+          color: var(--heading-color);
+          margin: 1rem 0 0.5rem;
+          font-size: 1.1rem;
+      }
+
+      .document-description {
+          color: var(--primary-color);
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+      }
+
+      .document-info {
+          color: var(--text-color);
+          font-size: 0.85rem;
+          line-height: 1.4;
+      }
+
+      /* Special style for Selection Documents subsection */
+      .subsection h4.subsection-title {
+        font-size: 1.4rem;  /* Smaller than the default 1.8rem */
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        text-align: left;
+      }
+
+      /* Global section alignment fixes */
+      .section-title, 
+      .subsection-title, 
+      h3.subsection-title, 
+      h4.subsection-title {
+        text-align: left;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .subsection-title {
+        font-size: 1.8rem;
+      }
+
+      h4.subsection-title {
+        font-size: 1.4rem;
+      }
+
+      /* Card content alignment */
+      .activity-card,
+      .certificate-card,
+      .experience-card,
+      .project-card {
+        text-align: left;
+      }
+
+      .activity-card h4,
+      .certificate-card h4,
+      .experience-card h4,
+      .project-card h4 {
+        text-align: left;
+        margin-bottom: 1rem;
+      }
+
+      .activity-organization,
+      .certificate-issuer,
+      .certificate-date {
+        text-align: left;
+      }
+
+      .activity-highlights,
+      .experience-highlights,
+      .project-features {
+        text-align: left;
+        padding-left: 0;
+      }
+
+      .activity-highlights li,
+      .experience-highlights li,
+      .project-features li {
+        text-align: left;
+        padding-left: 1.5rem;
+      }
+
+      /* Certificate grid alignment */
+      .certificates-grid {
+        text-align: left;
+      }
+
+      .certificate-preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Fix for any centered text that should remain centered */
+      .hero-text,
+      .contact-subtitle,
+      .footer-content {
+        text-align: center;
+      }
+
+      .contact-card {
+        text-align: center;
+      }
     </style>
 </head>
 <body>
@@ -1048,22 +1357,15 @@
 
     <!-- Activities and Certificates Section -->
     <section id="certificates" class="activities-certificates">
-        <div class="section-container">
-            <h2 class="section-title">Certificates & Activities</h2>
+        <div class="container">
+            <h2 class="section-title">Activities & Certificates</h2>
             
-            <!-- Activities Subsection -->
+            <!-- Position of Responsibility -->
             <div class="subsection">
                 <h3 class="subsection-title">Position of Responsibility</h3>
                 <div class="activities-grid">
+                    <!-- IoT Club Coordinator -->
                     <div class="activity-card">
-                        <div class="activity-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
                         <h4>Institute Event Coordinator - IoT Club, KVGCE</h4>
                         <ul class="activity-highlights">
                             <li>Responsible for planning and organizing technical events including workshops, seminars, and hands-on sessions focused on IoT and automation</li>
@@ -1072,14 +1374,10 @@
                         </ul>
                     </div>
 
+                    <!-- Project Leader -->
                     <div class="activity-card">
-                        <div class="activity-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                            </svg>
-                        </div>
                         <h4>Project Leader - 32-Bit MAC Unit (Major Project)</h4>
-                        <p class="activity-organization">KVG College of Engineering | 2024-2025</p>
+                        <div class="activity-organization">KVG College of Engineering | 2024-2025</div>
                         <ul class="activity-highlights">
                             <li>Spearheaded a team of 4 members in designing and implementing the 32-bit Multiply-Accumulate unit</li>
                             <li>Coordinated RTL design tasks, ensuring timely completion of Verilog modules</li>
@@ -1089,23 +1387,17 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- New Achievements Subsection -->
+
+            <!-- Achievements -->
             <div class="subsection">
                 <h3 class="subsection-title">Achievements</h3>
                 
-                <!-- Achievement Description -->
+                <!-- ISRO Achievement -->
                 <div class="activities-grid">
                     <div class="activity-card">
-                        <div class="activity-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 15l-8-8h16l-8 8z"/>
-                                <path d="M12 15v7"/>
-                                <path d="M8 19h8"/>
-                            </svg>
-                        </div>
                         <h4>ISRO Robotics Challenge (IRoC-U) 2024 – National Finalist</h4>
-                        <p class="activity-organization">Team Adhvitiya (ID: 10871) | KVG College of Engineering | Jan 2024</p>
+                        <div class="activity-organization">Team Adhvitiya (ID: 10871) | KVG College of Engineering | Jan 2024</div>
+                        
                         <ul class="activity-highlights">
                             <li>Selected among top 148 teams nationwide (from 1000+ entries) in ISRO's premier robotics competition</li>
                             <li>Key contributions in Rover Design: Optimized circuitry for autonomous navigation (crater/obstacle detection) and sample retrieval</li>
@@ -1116,250 +1408,253 @@
                     </div>
                 </div>
 
-                <!-- ISRO Documents - Update to match certificate style -->
-                <div class="proof-documents">
-                    <h5>Selection Documents</h5>
-                    <div class="documents-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                <!-- Selection Documents -->
+                <div class="subsection">
+                    <h4 class="subsection-title">Selection Documents</h4>
+                    <div class="certificates-grid">
                         <!-- ISRO Proposal Report -->
                         <div class="certificate-card">
                             <div class="certificate-preview">
-                                <embed src="ASSETS/ISRO/isro proposal report kvgce.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                                <embed src="ASSETS/ISRO/isro proposal report kvgce.pdf" type="application/pdf" class="certificate-embed">
                                 <div class="certificate-overlay">
-                                    <a href="ASSETS/ISRO/isro proposal report kvgce.pdf" target="_blank" class="view-certificate">View Proposal Report</a>
+                                    <a href="ASSETS/ISRO/isro proposal report kvgce.pdf" class="view-certificate" target="_blank">View Document</a>
                                 </div>
                             </div>
                             <h4>ISRO IRoC-U Proposal Report</h4>
-                            <p class="certificate-issuer">Team Adhvitiya (ID: 10871)</p>
-                            <p>Detailed technical proposal for lunar rover design</p>
+                            <div class="certificate-issuer">Team Adhvitiya (ID: 10871)</div>
+                            <div class="certificate-date">Detailed technical proposal for lunar rover design</div>
                         </div>
 
-                        <!-- ISRO Selection Result -->
+                        <!-- Selection Result -->
                         <div class="certificate-card">
                             <div class="certificate-preview">
-                                <embed src="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                                <embed src="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf" type="application/pdf" class="certificate-embed">
                                 <div class="certificate-overlay">
-                                    <a href="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf" target="_blank" class="view-certificate">View Selection Result</a>
+                                    <a href="ASSETS/ISRO/ISRO_1ST_ROUND_PRELIMS_SELECTED_RESULT.pdf" class="view-certificate" target="_blank">View Document</a>
                                 </div>
                             </div>
                             <h4>National Level Selection Result</h4>
-                            <p class="certificate-issuer">ISRO Robotics Challenge 2024</p>
-                            <p>First round qualification among top 148 teams</p>
+                            <div class="certificate-issuer">ISRO IRoC-U Program</div>
+                            <div class="certificate-date">Official selection notification for the lunar rover project</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Certificates Subsection -->
+            <!-- Certificates Section -->
             <div class="subsection">
-                <h3 class="subsection-title">Certifications</h3>
+                <h3 class="subsection-title">Certificates</h3>
                 <div class="certificates-grid">
-                    <!-- PLC Basics (GTTC) -->
+                    <!-- GTTC Certificates -->
+                    <!-- IoT Development Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/basics of plc by gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.jpg" alt="IoT Development" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/basics of plc by gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>PLC Fundamentals</h4>
-                        <p class="certificate-issuer">GTTC Mangalore</p>
-                        <p>Introduction to Programmable Logic Controllers and industrial automation</p>
-                    </div>
-
-                    <!-- Communication Skills (GTTC) -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/communication skills by gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/communication skills by gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Communication Skills</h4>
-                        <p class="certificate-issuer">GTTC Mangalore</p>
-                        <p>Professional communication and workplace interaction training</p>
-                    </div>
-
-                    <!-- IoT Development (GTTC) -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/fundamentals of iot development with thingworx in gttc mangalore.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
                         <h4>IoT Development with ThingWorx</h4>
-                        <p class="certificate-issuer">GTTC Mangalore</p>
-                        <p>Fundamentals of IoT development using ThingWorx platform</p>
-                    </div>
-                    
-                    <!-- KVGCE Internship -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/first year Intra internship kvgce certificate.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed" style="width: 100%; height: 100%; object-fit: contain;">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/first year Intra internship kvgce certificate.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Intra Internship Program</h4>
-                        <p class="certificate-issuer">KVGCE Innovation and Incubation Cell</p>
-                        <p>First-year internship program focused on practical engineering applications</p>
+                        <div class="certificate-issuer">GTTC Mangalore</div>
+                        <div class="certificate-date">Technical Course</div>
                     </div>
 
-                    <!-- Arduino Intermediate -->
+                    <!-- PLC Basics Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/basics of plc by gttc mangalore.jpg" alt="PLC Basics" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/basics of plc by gttc mangalore.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
-                        <h4>Arduino Intermediate Course</h4>
-                        <p class="certificate-issuer">Infosys Springboard</p>
-                        <p>Advanced Arduino programming and project development</p>
+                        <h4>PLC Basics</h4>
+                        <div class="certificate-issuer">GTTC Mangalore</div>
+                        <div class="certificate-date">Technical Course</div>
                     </div>
 
-                    <!-- Python Basics -->
+                    <!-- Communication Skills Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/basics of python  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/communication skills by gttc mangalore.jpg" alt="Communication Skills" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/basics of python  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/communication skills by gttc mangalore.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
-                        <h4>Python Programming Basics</h4>
-                        <p class="certificate-issuer">Infosys Springboard</p>
-                        <p>Fundamental concepts of Python programming language</p>
+                        <h4>Communication Skills</h4>
+                        <div class="certificate-issuer">GTTC Mangalore</div>
+                        <div class="certificate-date">Soft Skills Training</div>
                     </div>
 
-                    <!-- Semiconductors -->
+                    <!-- Infosys SpringBoard Certificates -->
+                    <!-- Time Management Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/time management  in infosys spring board.jpg" alt="Time Management" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Extrinsic Semiconductors</h4>
-                        <p class="certificate-issuer">Infosys Springboard</p>
-                        <p>Introduction to semiconductor physics and applications</p>
-                    </div>
-
-                    <!-- Arduino Workshop -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Resource Person - Arduino Workshop</h4>
-                        <p class="certificate-issuer">KVGCE</p>
-                        <p class="certificate-date">July 21, 2023</p>
-                        <p>Letter of appreciation for conducting Arduino with TinkerCAD workshop</p>
-                    </div>
-
-                    <!-- MicroPython -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/micro_python_board in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/micro_python_board in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>MicroPython Programming</h4>
-                        <p class="certificate-issuer">Infosys Springboard</p>
-                        <p>MicroPython implementation for embedded systems</p>
-                    </div>
-
-                    <!-- RBI Quiz -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/participated in RBI national wide Quiz.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/participated in RBI national wide Quiz.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>RBI National Quiz Participant</h4>
-                        <p class="certificate-issuer">Reserve Bank of India</p>
-                        <p>Participation in nationwide financial literacy quiz</p>
-                    </div>
-
-                    <!-- Programming Basics -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/Programming basics in great learning.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/Programming basics in great learning.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Programming Fundamentals</h4>
-                        <p class="certificate-issuer">Great Learning</p>
-                        <p>Core concepts of computer programming</p>
-                    </div>
-
-                    <!-- Solar Panel Installation -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/skill india solar pannel installation.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/skill india solar pannel installation.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Solar Panel Installation</h4>
-                        <p class="certificate-issuer">Skill India</p>
-                        <p>Technical training in solar panel installation and maintenance</p>
-                    </div>
-
-                    <!-- TCS iON -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/tcs ion softskill training of 2 week s.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/tcs ion softskill training of 2 week s.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
-                            </div>
-                        </div>
-                        <h4>Soft Skills Training</h4>
-                        <p class="certificate-issuer">TCS iON</p>
-                        <p>Two-week comprehensive soft skills development program</p>
-                    </div>
-
-                    <!-- Time Management -->
-                    <div class="certificate-card">
-                        <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/time management  in infosys spring board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
-                            <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/time management  in infosys spring board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/time management  in infosys spring board.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
                         <h4>Time Management</h4>
-                        <p class="certificate-issuer">Infosys Springboard</p>
-                        <p>Effective time management and productivity techniques</p>
+                        <div class="certificate-issuer">Infosys SpringBoard</div>
+                        <div class="certificate-date">Online Course</div>
                     </div>
 
-                    <!-- VLSI Basics -->
+                    <!-- Micro Python Board Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/micro_python_board in infosys spring board.jpg" alt="Micro Python Board" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/micro_python_board in infosys spring board.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Micro Python Board</h4>
+                        <div class="certificate-issuer">Infosys SpringBoard</div>
+                        <div class="certificate-date">Technical Course</div>
+                    </div>
+
+                    <!-- Extrinsic Semiconductors Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.jpg" alt="Extrinsic Semiconductors" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/introduction to extrinsic semiconductors in infosys spring board.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Extrinsic Semiconductors</h4>
+                        <div class="certificate-issuer">Infosys SpringBoard</div>
+                        <div class="certificate-date">Technical Course</div>
+                    </div>
+
+                    <!-- Python Basics Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/basics of python  in infosys spring board.jpg" alt="Python Basics" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/basics of python  in infosys spring board.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Python Basics</h4>
+                        <div class="certificate-issuer">Infosys SpringBoard</div>
+                        <div class="certificate-date">Programming Course</div>
+                    </div>
+
+                    <!-- Arduino Intermediate Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.jpg" alt="Arduino Intermediate" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Arduino_intermediate  in infosys spring board.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Arduino Intermediate</h4>
+                        <div class="certificate-issuer">Infosys SpringBoard</div>
+                        <div class="certificate-date">Technical Course</div>
+                    </div>
+
+                    <!-- KVGCE Certificates -->
+                    <!-- Arduino Workshop Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.jpg" alt="Arduino Workshop Resource Person" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Letter of appreciation for resource person in th arduino with tinker cad workshop on july 21_2023 at kvgce.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Arduino Workshop Resource Person</h4>
+                        <div class="certificate-issuer">KVGCE</div>
+                        <div class="certificate-date">July 21, 2023</div>
+                    </div>
+
+                    <!-- Internship Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/first year Intra internship kvgce certificate.jpg" alt="First Year Internship" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/first year Intra internship kvgce certificate.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>First Year Internship</h4>
+                        <div class="certificate-issuer">KVGCE</div>
+                        <div class="certificate-date">Intra-College Program</div>
+                    </div>
+
+                    <!-- Other Certificates -->
+                    <!-- VLSI Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.jpg" alt="VLSI for Beginners" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/vlsi for beginers by natonal institute of electronics and information technolgy nit campus calicut kerala.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
                         <h4>VLSI for Beginners</h4>
-                        <p class="certificate-issuer">National Institute of Electronics and Information Technology, NIT Calicut</p>
-                        <p>Introduction to VLSI design and implementation</p>
+                        <div class="certificate-issuer">National Institute of Electronics and Information Technology</div>
+                        <div class="certificate-date">NIT Campus Calicut, Kerala</div>
                     </div>
-                    
-                    <!-- Sports and Fitness (MOVED TO LAST) -->
+
+                    <!-- TCS ION Certificate -->
                     <div class="certificate-card">
                         <div class="certificate-preview">
-                            <embed src="ASSETS/Certificates/asian sport and physical fittness board.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" class="certificate-embed">
+                            <img src="ASSETS/Certificates/tcs ion softskill training of 2 week s.jpg" alt="TCS ION Softskill Training" class="certificate-embed">
                             <div class="certificate-overlay">
-                                <a href="ASSETS/Certificates/asian sport and physical fittness board.pdf" target="_blank" class="view-certificate">View Full Certificate</a>
+                                <a href="ASSETS/Certificates/tcs ion softskill training of 2 week s.jpg" class="view-certificate">View Certificate</a>
                             </div>
                         </div>
-                        <h4>Sports and Physical Fitness Certification</h4>
-                        <p class="certificate-issuer">Asian Sport and Physical Fitness Board</p>
-                        <p>Comprehensive training in sports and physical fitness</p>
+                        <h4>Softskill Training</h4>
+                        <div class="certificate-issuer">TCS ION</div>
+                        <div class="certificate-date">2 Weeks Training Program</div>
+                    </div>
+
+                    <!-- Solar Panel Installation Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/skill india solar pannel installation.jpg" alt="Solar Panel Installation" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/skill india solar pannel installation.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Solar Panel Installation</h4>
+                        <div class="certificate-issuer">Skill India</div>
+                        <div class="certificate-date">Technical Training</div>
+                    </div>
+
+                    <!-- Programming Basics Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/Programming basics in great learning.jpg" alt="Programming Basics" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/Programming basics in great learning.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Programming Basics</h4>
+                        <div class="certificate-issuer">Great Learning</div>
+                        <div class="certificate-date">Online Course</div>
+                    </div>
+
+                    <!-- RBI Quiz Certificate -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/participated in RBI national wide Quiz.jpg" alt="RBI National Quiz" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/participated in RBI national wide Quiz.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>RBI National Quiz</h4>
+                        <div class="certificate-issuer">Reserve Bank of India</div>
+                        <div class="certificate-date">National Competition</div>
+                    </div>
+
+                    <!-- Sports Certificate (Last) -->
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="ASSETS/Certificates/asian sport and physical fittness board.jpg" alt="Sports and Physical Fitness" class="certificate-embed">
+                            <div class="certificate-overlay">
+                                <a href="ASSETS/Certificates/asian sport and physical fittness board.jpg" class="view-certificate">View Certificate</a>
+                            </div>
+                        </div>
+                        <h4>Sports and Physical Fitness</h4>
+                        <div class="certificate-issuer">Asian Sport and Physical Fitness Board</div>
+                        <div class="certificate-date">Physical Education</div>
                     </div>
                 </div>
             </div>
